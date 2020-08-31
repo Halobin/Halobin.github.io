@@ -17,9 +17,11 @@
 ]]></content>
       <categories>
         <category>Leetcode</category>
+        <category>周赛</category>
       </categories>
       <tags>
-        <tag>周赛</tag>
+        <tag>二叉树</tag>
+        <tag>深度优先遍历</tag>
       </tags>
   </entry>
 </search>
