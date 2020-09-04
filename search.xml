@@ -111,8 +111,8 @@
         <category>周赛</category>
       </categories>
       <tags>
-        <tag>深度优先遍历</tag>
-        <tag>贪心</tag>
+        <tag>动态规划</tag>
+        <tag>并查集</tag>
       </tags>
   </entry>
 </search>
