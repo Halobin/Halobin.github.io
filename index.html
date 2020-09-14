@@ -252,6 +252,60 @@
       
       
         <div class="post-header"> 
+  <a class="post-header-title" href="/2020/09/14/%E3%80%90Leetcode%E3%80%91%E7%AC%AC206%E5%9C%BA%E5%91%A8%E8%B5%9B/">【Leetcode】第206场周赛</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      发布于:&nbsp;2020-09-14
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      更新于:&nbsp;2020-09-14
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      分类于:&nbsp;<a class="category-link" href="/categories/Leetcode/">Leetcode</a> > <a class="category-link" href="/categories/Leetcode/%E5%91%A8%E8%B5%9B/">周赛</a>
+    </span>
+    
+  </div>
+</div>   
+    
+
+
+
+      
+      
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/ >动态规划</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/ >并查集</a>
+      </i>
+    
+  </div>
+
+      
+      <div id="achieve-abstract" class="mdui-card-content mdui-p-x-4">
+        <div class="post-abstract mdui-typo ">
+          
+            <h2 id="A-二进制矩阵中的特殊位置"><a href="#A-二进制矩阵中的特殊位置" class="headerlink" title="A.二进制矩阵中的特殊位置"></a>A.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/special-positions-in-a-binary-matrix/">二进制矩阵中的特殊位置</a></h2><p><font size=4><strong>解题思路：</strong></font><br>预处理所有行列和，遍历所有元素，如果该元素为1，并且行列和都为1，则满足要求。<br><font size=4><strong>代码展示：</strong></font></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> rows[<span class="number">105</span>],cols[<span class="number">105</span>];</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numSpecial</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; mat)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = mat.size();</span><br><span class="line">        <span class="keyword">if</span>(!n)  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> m = mat[<span class="number">0</span>].size();</span><br><span class="line">        <span class="built_in">memset</span>(rows,<span class="number">0</span>,<span class="keyword">sizeof</span>(rows));</span><br><span class="line">        <span class="built_in">memset</span>(cols,<span class="number">0</span>,<span class="keyword">sizeof</span>(cols));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;m;j++)&#123;</span><br><span class="line">                rows[i] += mat[i][j];</span><br><span class="line">                cols[j] += mat[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;m;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(mat[i][j]==<span class="number">1</span> &amp;&amp; rows[i]==<span class="number">1</span> &amp;&amp; cols[j]==<span class="number">1</span>)</span><br><span class="line">                    ans++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          
+        </div>
+        
+        <div style="text-align:center;">
+          <a class="post-readmore mdui-btn mdui-ripple mdui-btn-raised" href="/2020/09/14/%E3%80%90Leetcode%E3%80%91%E7%AC%AC206%E5%9C%BA%E5%91%A8%E8%B5%9B/">阅读更多</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="mdui-card mdui-m-b-5 mdui-hoverable">    
+      
+      
+        <div class="post-header"> 
   <a class="post-header-title" href="/2020/09/03/%E3%80%90Leetcode%E3%80%91%E7%AC%AC203%E5%9C%BA%E5%91%A8%E8%B5%9B/">【Leetcode】第203场周赛</a>
   <div class="post-header-meta">
     <span>
