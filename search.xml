@@ -141,8 +141,9 @@
         <category>周赛</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
+        <tag>贪心</tag>
         <tag>并查集</tag>
+        <tag>最小生成树</tag>
       </tags>
   </entry>
 </search>
