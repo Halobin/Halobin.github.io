@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Regular.woff2" as="font">
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Bold.woff2" as="font">
+    
+    
+    
+        <link rel="shortcut icon" href="/images/fav.webp">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+    
+    
+    <title>
+        
+            【Leetcode】第210场周赛 | Halobin&#39;s Blog
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">Halobin&#39;s Blog</a>
+    <a href="/" class="header-subtitle mdui-typo-headline"></a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">站点概览</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">关于</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-2">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">主页</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">标签</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">分类</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">归档</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">夜间模式</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-2">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="/images/avatar.png"/>
+                
+            </div>
+            <div class="sidebar-author-name">Halobin</div>
+            <div class="sidebar-description">越努力，越幸运</div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-leetcode"></i></span>
+                    <a target="_blank" rel="noopener" href="https://leetcode-cn.com/u/halobin/" class="mdui-chip-title">LeetCode</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/Halobin" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">友情链接</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://xiaokblog.com/" class="mdui-list-item mdui-ripple">
+                            Xiaok
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://comydream.github.io" class="mdui-list-item mdui-ripple">
+                            ComyDream
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://lingdemeng.github.io/" class="mdui-list-item mdui-ripple">
+                            Brannn
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/2020/10/17/%E3%80%90Leetcode%E3%80%91%E7%AC%AC210%E5%9C%BA%E5%91%A8%E8%B5%9B/">【Leetcode】第210场周赛</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      发布于:&nbsp;2020-10-17
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      更新于:&nbsp;2020-10-17
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      分类于:&nbsp;<a class="category-link" href="/categories/Leetcode/">Leetcode</a> > <a class="category-link" href="/categories/Leetcode/%E5%91%A8%E8%B5%9B/">周赛</a>
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        阅读次数:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=【Leetcode】第210场周赛&url=http://yoursite.com/2020/10/17/%E3%80%90Leetcode%E3%80%91%E7%AC%AC210%E5%9C%BA%E5%91%A8%E8%B5%9B/&pic=http://yoursite.com/images/fav.webp&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=【Leetcode】第210场周赛&url=http://yoursite.com/2020/10/17/%E3%80%90Leetcode%E3%80%91%E7%AC%AC210%E5%9C%BA%E5%91%A8%E8%B5%9B/&via=Halobin" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/10/17/%E3%80%90Leetcode%E3%80%91%E7%AC%AC210%E5%9C%BA%E5%91%A8%E8%B5%9B/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://yoursite.com/2020/10/17/%E3%80%90Leetcode%E3%80%91%E7%AC%AC210%E5%9C%BA%E5%91%A8%E8%B5%9B/" target="_blank" class="mdui-ripple">分享到 Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://yoursite.com/2020/10/17/%E3%80%90Leetcode%E3%80%91%E7%AC%AC210%E5%9C%BA%E5%91%A8%E8%B5%9B/&title=【Leetcode】第210场周赛" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=Halobin&#39;s Blog&title=【Leetcode】第210场周赛&summary=越努力，越幸运&pics=http://yoursite.com/images/fav.webp&url=http://yoursite.com/2020/10/17/%E3%80%90Leetcode%E3%80%91%E7%AC%AC210%E5%9C%BA%E5%91%A8%E8%B5%9B/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://yoursite.com/2020/10/17/%E3%80%90Leetcode%E3%80%91%E7%AC%AC210%E5%9C%BA%E5%91%A8%E8%B5%9B/&text=【Leetcode】第210场周赛" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%9E%9A%E4%B8%BE/ >二进制枚举</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/ >最短路</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/ >广度优先搜索</a>
+      </i>
+    
+  </div>
+
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <h2 id="A-括号的最大嵌套深度"><a href="#A-括号的最大嵌套深度" class="headerlink" title="A.括号的最大嵌套深度"></a>A.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-nesting-depth-of-the-parentheses/">括号的最大嵌套深度</a></h2><p><font size=4><strong>解题思路：</strong></font><br>模拟。<br><font size=4><strong>代码展示：</strong></font></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.size(),ans = <span class="number">0</span>,t = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == <span class="string">&#x27;(&#x27;</span>)&#123;</span><br><span class="line">                t++;</span><br><span class="line">                ans = max(ans,t);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(s[i] == <span class="string">&#x27;)&#x27;</span>)&#123;</span><br><span class="line">                t--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h2 id="B-最大网络秩"><a href="#B-最大网络秩" class="headerlink" title="B.最大网络秩"></a>B.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximal-network-rank/">最大网络秩</a></h2><p><font size=4><strong>解题思路：</strong></font><br>用邻接矩阵记录两个城市是否有道路，并记录每个城市相连的道路条数。暴力枚举城市对，算出这个城市对的答案为两个城市相连道路条数和并减去两个城市互连的道路。最大网络秩为各个城市对答案的最大值。<br><font size=4><strong>代码展示：</strong></font></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; isr;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximalNetworkRank</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; roads)</span> </span>&#123;</span><br><span class="line">        isr.resize(n,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n,<span class="number">0</span>));</span><br><span class="line">        nums.resize(n,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; roads.size();i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> x = roads[i][<span class="number">0</span>], y = roads[i][<span class="number">1</span>];</span><br><span class="line">            isr[x][y] = isr[y][x] = <span class="number">1</span>;</span><br><span class="line">            nums[x]++;  nums[y]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>;j &lt; n;j++)&#123;</span><br><span class="line">                ans = max(ans,nums[i] + nums[j] - isr[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="C-分割两个字符串得到回文串"><a href="#C-分割两个字符串得到回文串" class="headerlink" title="C.分割两个字符串得到回文串"></a>C.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/split-two-strings-to-make-palindrome/">分割两个字符串得到回文串</a></h2><p><font size=4><strong>解题思路：</strong></font><br>从字符串A中心找最大回文串，以此划分A字符串为A<del>le</del> A<del>mid</del>A<del>ri</del>，以相同位置划分B为B<del>le</del> B<del>mid</del>B<del>ri</del>。如果A<del>le</del> + B<del>ri</del> 或者 B<del>le</del>+A<del>ri</del> 为回文串，则分割这两个字符串可以得到回文串。同理寻找B的中心回文串，以此来划分A和B字符串，判断A<del>le</del> + B<del>ri</del> 或者 B<del>le</del>+A<del>ri</del> 是否为回文串。如果都不是，则分割这两个字符串不可以得到回文串<br><font size=4><strong>代码展示：</strong></font></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">checkPalindromeFormation</span><span class="params">(<span class="built_in">string</span> a, <span class="built_in">string</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = a.size(),midl,midr;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">1</span> || n == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        midl = (n - <span class="number">2</span>) / <span class="number">2</span>;midr = midl + <span class="number">1</span> + n % <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(midl &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[midl] != a[midr])  <span class="keyword">break</span>;</span><br><span class="line">            midl--;midr++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(midl &lt; <span class="number">0</span>)    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">string</span> s1 = a.substr(<span class="number">0</span>,midl + <span class="number">1</span>), s2 = a.substr(midr,n - midr);</span><br><span class="line">        <span class="built_in">string</span> s3 = b.substr(<span class="number">0</span>,midl + <span class="number">1</span>), s4 = b.substr(midr,n - midr);</span><br><span class="line">        reverse(s2.begin(),s2.end());</span><br><span class="line">        reverse(s4.begin(),s4.end());</span><br><span class="line">        <span class="keyword">if</span>(s1 == s4 || s2 == s3)    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        midl = (n - <span class="number">2</span>) / <span class="number">2</span>;midr = midl + <span class="number">1</span> + n % <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(midl &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(b[midl] != b[midr])  <span class="keyword">break</span>;</span><br><span class="line">            midl--;midr++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(midl &lt; <span class="number">0</span>)    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        s1 = a.substr(<span class="number">0</span>,midl + <span class="number">1</span>), s2 = a.substr(midr,n - midr);</span><br><span class="line">        s3 = b.substr(<span class="number">0</span>,midl + <span class="number">1</span>), s4 = b.substr(midr,n - midr);</span><br><span class="line">        reverse(s2.begin(),s2.end());</span><br><span class="line">        reverse(s4.begin(),s4.end());</span><br><span class="line">        <span class="keyword">if</span>(s1 == s4 || s2 == s3)    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="D-统计子树中城市之间最大距离"><a href="#D-统计子树中城市之间最大距离" class="headerlink" title="D.统计子树中城市之间最大距离"></a>D.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/count-subtrees-with-max-distance-between-cities/">统计子树中城市之间最大距离</a></h2><p><font size=4><strong>解题思路：</strong></font><br>二进制枚举，最短路。一共只有十五个城市，二进制枚举所有可能情况。先判断枚举的城市组合是否是连通的。如果是连通的，则以每个城市为起点，用广度优先搜索算法计算一次最短路。</p>
+<p><font size=4><strong>代码展示：</strong></font></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vis;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; edges;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">max_dis</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>,eds=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">e</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; edges.size();i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> x = edges[i][<span class="number">0</span>], y = edges[i][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">if</span>(vis[x] &amp;&amp; vis[y])&#123;</span><br><span class="line">                eds++;</span><br><span class="line">                e[x].push_back(y); e[y].push_back(x);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; vis.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(vis[i])  t++;</span><br><span class="line">            <span class="keyword">if</span>(vis[i] &amp;&amp; e[i].size() == <span class="number">0</span>)  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(t != eds+<span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; vis.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(vis[i])&#123;</span><br><span class="line">                v = vis;</span><br><span class="line">                <span class="built_in">queue</span>&lt;<span class="built_in">pair</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;&gt; q;</span><br><span class="line">                q.push(&#123;i,<span class="number">0</span>&#125;);</span><br><span class="line">                v[i] = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">                    <span class="keyword">auto</span> t = q.front();</span><br><span class="line">                    q.pop();</span><br><span class="line">                    <span class="keyword">int</span> x = t.first, d = t.second;</span><br><span class="line">                    res = max(res,d);</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; e[x].size();j++)&#123;</span><br><span class="line">                        <span class="keyword">int</span> to = e[x][j];</span><br><span class="line">                        <span class="keyword">if</span>(v[to])&#123;</span><br><span class="line">                            v[to] = <span class="literal">false</span>;</span><br><span class="line">                            q.push(&#123;to,d+<span class="number">1</span>&#125;);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">countSubgraphsForEachDiameter</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; edges)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;n = n;</span><br><span class="line">        ans.resize(n<span class="number">-1</span>,<span class="number">0</span>);</span><br><span class="line">        vis.resize(n);</span><br><span class="line">        <span class="keyword">int</span> e = edges.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; e;i++)&#123;</span><br><span class="line">            edges[i][<span class="number">0</span>]--;</span><br><span class="line">            edges[i][<span class="number">1</span>]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>-&gt;edges = edges;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; (<span class="number">1</span>&lt;&lt;n);i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; n;j++) vis[j] = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; n;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i &amp; (<span class="number">1</span> &lt;&lt; j))&#123;</span><br><span class="line">                    vis[j] = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> res = max_dis();</span><br><span class="line">            <span class="keyword">if</span>(res&gt;=<span class="number">1</span>) ans[res<span class="number">-1</span>]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><font size=5><strong>做题情况：</strong></font><br>AC 三题<br>排名：291 / 4006<br><font size=5><strong>总结反思：</strong></font><br>前三题写的还行，第四题一开始没想到二进制枚举，写起来也比较生疏，导致最后也没写完。</p>
+
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2020/09/25/%E3%80%90Leetcode%E3%80%91%E7%AC%AC207%E5%9C%BA%E5%91%A8%E8%B5%9B/">
+        <span>【Leetcode】第207场周赛</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2020/10/17/%E3%80%90Leetcode%E3%80%91%E7%AC%AC210%E5%9C%BA%E5%91%A8%E8%B5%9B/" id="toc-header" class="mdui-ripple">文章目录</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-%E6%8B%AC%E5%8F%B7%E7%9A%84%E6%9C%80%E5%A4%A7%E5%B5%8C%E5%A5%97%E6%B7%B1%E5%BA%A6"><span class="toc-number">1.</span> <span class="toc-text">A.括号的最大嵌套深度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-%E6%9C%80%E5%A4%A7%E7%BD%91%E7%BB%9C%E7%A7%A9"><span class="toc-number">2.</span> <span class="toc-text">B.最大网络秩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E5%88%86%E5%89%B2%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%BE%97%E5%88%B0%E5%9B%9E%E6%96%87%E4%B8%B2"><span class="toc-number">3.</span> <span class="toc-text">C.分割两个字符串得到回文串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-%E7%BB%9F%E8%AE%A1%E5%AD%90%E6%A0%91%E4%B8%AD%E5%9F%8E%E5%B8%82%E4%B9%8B%E9%97%B4%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB"><span class="toc-number">4.</span> <span class="toc-text">D.统计子树中城市之间最大距离</span></a></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2020 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        Halobin
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>总访客量 <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>总访问量 <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >
