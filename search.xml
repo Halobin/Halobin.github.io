@@ -241,4 +241,51 @@
         <tag>广度优先搜索</tag>
       </tags>
   </entry>
+  <entry>
+    <title></title>
+    <url>/2020/10/29/%E6%B5%85%E8%B0%88%E5%8D%95%E8%B0%83%E6%A0%88/</url>
+    <content><![CDATA[<p><font size=5><strong>1、什么是单调栈？</strong></font></p>
+<p>顾名思义，单调栈就是栈内元素具有单调性。分为单调递增栈和单调递减栈。</p>
+<ol>
+<li>单调递增栈就是从栈底到栈顶是从大到小。</li>
+<li>单调递减栈就是从栈底到栈顶是从小到大。</li>
+</ol>
+<p><font size=5><strong>2、单调栈的适用问题</strong></font></p>
+<p>通过使用单调栈，可以找到从左/右遍历第一个比它小/大的元素的位置。也就是说在队列或数组中，我们需要通过比较前后元素的大小关系来解决问题时我们通常使用单调栈。</p>
+<p><font size=5><strong>3、单调栈的算法流程</strong></font></p>
+<p>遍历数组，维护一个栈，对于当前元素的数值如果小于栈顶元素的数值，则将其压入栈顶；否则就一直弹出栈顶，直到栈空或者当前元素的数值小于栈顶元素的数值。</p>
+<p>实例 :   nums = [7,3,4,9,1,0,8,6,2]</p>
+<ol>
+<li>枚举第一个元素7。此时栈空，入栈。栈内元素：7。</li>
+<li>枚举第二个元素3。此时栈顶元素7 &gt; 3，则入栈。栈内元素：7，3。</li>
+<li>枚举第三个元素4。此时栈顶元素3 &lt; 4, 则栈顶元素出栈。此时栈顶元素7 &gt; 4，则入栈。栈内元素：7，4。</li>
+<li>枚举第四个元素9。此时栈顶元素4 &lt; 9, 则栈顶元素出栈。此时栈顶元素7 &lt; 9, 则栈顶元素出栈。此时栈空，入栈。栈内元素：9。</li>
+<li>枚举第五个元素1。此时栈顶元素9 &gt; 1，则入栈。栈内元素：9，1。</li>
+<li>枚举第六个元素0。此时栈顶元素1 &gt; 0，则入栈。栈内元素：9，1，0。</li>
+<li>枚举第七个元素8。此时栈顶元素0 &lt; 8，则栈顶元素出栈。此时栈顶元素1 &lt; 8, 则栈顶元素出栈。此时栈顶元素9 &gt; 8，则入栈。栈内元素：9，8。</li>
+<li>枚举第八个元素6。此时栈顶元素8 &gt; 6，则入栈。栈内元素：9，8，6。</li>
+<li>枚举第九个元素2。此时栈顶元素6 &gt; 2，则入栈。栈内元素：9，8，6，2。</li>
+</ol>
+<p><font size=5><strong>4、单调栈的伪代码</strong></font></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;单调递增栈</span><br><span class="line">stack&lt;int&gt; st;</span><br><span class="line">for(遍历数组)&#123;</span><br><span class="line">	while(栈不空 &amp;&amp; 栈顶元素 &lt;&#x3D; 当前元素) st.pop();</span><br><span class="line">	更新结果;</span><br><span class="line">	当前元素入栈;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><font size=5><strong>5、例题</strong></font></p>
+<p><font size=4>A.<a href="https://leetcode-cn.com/problems/daily-temperatures/">每日温度</a></font></p>
+<p>单调递减栈，从后往前遍历数组，如果栈顶元素值小于等于当前元素值，则栈顶元素出队。直到栈空或者栈顶元素值大于当前元素值。更新结果：如果栈空，结果为0，如果不为空，结果为栈顶元素位置减去当前元素位置 。然后将当前元素入栈。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">dailyTemperatures</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; T)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = T.size();</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">ans</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n - <span class="number">1</span>;i &gt;= <span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="keyword">while</span>(!st.empty() &amp;&amp; T[st.top()] &lt;= T[i])   st.pop();</span><br><span class="line">            ans[i] = st.empty() ? <span class="number">0</span> : st.top() - i;</span><br><span class="line">            st.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><font size=4>B.<a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">柱状图中最大的矩形</a></font></p>
+<p>单调递增栈。枚举高度，对于每个高度找到前一个比它小的位置和后一个比它小的位置，这两个位置之间的所有柱子高度都小于当前元素。用两次单调递增栈分别求出左侧和右侧最近小于其高度的柱子。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heights)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = heights.size();</span><br><span class="line">        vector&lt;int&gt; left(n),right(n);</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(!st.empty() &amp;&amp; heights[st.top()] &gt;= heights[i])    st.pop();</span><br><span class="line">            left[i] = st.empty() ? <span class="number">-1</span> : st.top();</span><br><span class="line">            st.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(!st.empty())  st.pop();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n<span class="number">-1</span>;i &gt;= <span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="keyword">while</span>(!st.empty() &amp;&amp; heights[st.top()] &gt;= heights[i])    st.pop();</span><br><span class="line">            right[i] = st.empty() ? n : st.top();</span><br><span class="line">            st.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">            ans = max(ans,(right[i] - left[i] - <span class="number">1</span>) * heights[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><font size=5><strong>6、总结</strong></font></p>
+<p>单调栈的时间复杂度是O(n)，空间复杂度是O(n)。可以用于求出左右两侧大于或者小于此元素的第一个元素。</p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>单调栈</tag>
+      </tags>
+  </entry>
 </search>
