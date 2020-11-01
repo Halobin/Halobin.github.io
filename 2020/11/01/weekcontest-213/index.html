@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Regular.woff2" as="font">
+        <link rel="preload" crossorigin="crossorigin" href="/fonts/roboto/Roboto-Bold.woff2" as="font">
+    
+    
+    
+        <link rel="shortcut icon" href="/images/fav.webp">
+    
+
+    
+    
+        
+<link rel="stylesheet" href="/css/mdui.min.v1.0.0.css">
+
+    
+    
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/iconfont.css">
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+    
+    
+    <title>
+        
+            【Leetcode】第213场周赛 | Halobin&#39;s Blog
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 5.1.1"></head>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-teal mdui-theme-accent-blue">
+  
+  <header class="mdui-appbar mdui-appbar-fixed">
+  <div id="toolbar" class="mdui-toolbar mdui-color-theme">
+    <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: '#sidebar', swipe: true}"><i class="iconfont icon-menu"></i></button>
+    <a href="/" class="mdui-typo-headline">Halobin&#39;s Blog</a>
+    <a href="/" class="header-subtitle mdui-typo-headline"></a>
+    <div class="mdui-toolbar-spacer"></div>
+    <button class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#search'}" mdui-tooltip="{content: 'search'}"><i class="iconfont icon-search"></i></button>
+  </div>
+</header>
+
+<div class="mdui-dialog" id="search">
+  
+    <div class="search-form">
+      <input type="search" class="search-form-input" placeholder="请输入关键字" onfocus="listenSearchFunc()">
+    </div>
+    <div class="search-result" data-resource="/search.xml"></div>
+  
+</div>
+
+  <aside id="sidebar" class="mdui-drawer">
+    <div class="mdui-tab" mdui-tab>
+        <a href="#sidebar-tab1" id="sidebartab" class="mdui-ripple mdui-tab-active">站点概览</a>
+        <a href="#sidebar-tab2" id="sidebartab" class="mdui-ripple">关于</a>
+    </div>
+
+    
+    <div id="sidebar-tab1" class="mdui-p-a-2">
+        <div class="mdui-list">
+            
+                
+                <a href="/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-home"></i>
+                    </div>
+                    <div class="mdui-list-item-content">主页</div>
+                </a>
+            
+                
+                <a href="/tags/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-bookmark"></i>
+                    </div>
+                    <div class="mdui-list-item-content">标签</div>
+                </a>
+            
+                
+                <a href="/categories/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-folder"></i>
+                    </div>
+                    <div class="mdui-list-item-content">分类</div>
+                </a>
+            
+                
+                <a href="/archives/" class="mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-archive"></i>
+                    </div>
+                    <div class="mdui-list-item-content">归档</div>
+                </a>
+            
+            <div class="mdui-list-item mdui-ripple">
+                <div class="mdui-list-item-icon">
+                    <i class="iconfont icon-moon"></i>
+                </div>
+                <div class="mdui-list-item-content">夜间模式</div>
+                <label class="mdui-switch" id="darkmode">
+                  <input type="checkbox" id="nightmode_switch"/>
+                  <i class="mdui-switch-icon"></i>
+                </label>
+            </div>           
+        </div>
+    </div>
+
+    
+    <div id="sidebar-tab2" class="mdui-p-a-2">
+        <div class="sidebar-overview">
+            <div class="sidebar-avatar">
+                
+                    <img src="/images/avatar.png"/>
+                
+            </div>
+            <div class="sidebar-author-name">Halobin</div>
+            <div class="sidebar-description">越努力，越幸运</div>
+        </div>
+        <div class="sidebar-links">
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-leetcode"></i></span>
+                    <a target="_blank" rel="noopener" href="https://leetcode-cn.com/u/halobin/" class="mdui-chip-title">LeetCode</a>
+                </div>
+            
+                
+                <div class="mdui-chip">
+                    <span class="mdui-chip-icon"><i class="iconfont icon-github"></i></span>
+                    <a target="_blank" rel="noopener" href="https://github.com/Halobin" class="mdui-chip-title">GitHub</a>
+                </div>
+            
+        </div>
+        <ul class="mdui-list" mdui-collapse="{accordion: true}">
+            <li class="mdui-collapse-item">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <div class="mdui-list-item-icon">
+                        <i class="iconfont icon-link"></i>
+                    </div>
+                    <div class="mdui-list-item-content">友情链接</div>
+                    <div class="mdui-collapse-item-arrow">
+                        <i class="mdui-list-item-icon iconfont icon-angle-down"></i>
+                    </div>
+                </div>
+                <ul id="linksList" class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    
+                        <a target="_blank" rel="noopener" href="https://xiaokblog.com/" class="mdui-list-item mdui-ripple">
+                            Xiaok
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://comydream.github.io" class="mdui-list-item mdui-ripple">
+                            ComyDream
+                        </a>
+                    
+                        <a target="_blank" rel="noopener" href="https://lingdemeng.github.io/" class="mdui-list-item mdui-ripple">
+                            Brannn
+                        </a>
+                    
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdui-divider"></div>
+    
+    
+</aside>
+  
+  <main id="main-contain" class="mdui-container mdui-m-t-5">
+    <article id="article" class="mdui-card mdui-p-b-2 mdui-m-b-5">
+  <header class="mdui-card-media">
+    
+    
+      <div class="post-header"> 
+  <a class="post-header-title" href="/2020/11/01/weekcontest-213/">【Leetcode】第213场周赛</a>
+  <div class="post-header-meta">
+    <span>
+      <span class="iconfont icon-calendar"></span>
+      发布于:&nbsp;2020-11-01
+    </span>
+    <span>
+      <span class="iconfont icon-calendar-check"></span>
+      更新于:&nbsp;2020-11-01
+    </span>
+    <span>
+      <span class="iconfont icon-folder"></span>
+      分类于:&nbsp;<a class="category-link" href="/categories/Leetcode/">Leetcode</a> > <a class="category-link" href="/categories/Leetcode/%E5%91%A8%E8%B5%9B/">周赛</a>
+    </span>
+    
+      <span>
+        <span class="iconfont icon-eye"></span>
+        阅读次数:&nbsp;
+        <span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+      </span>
+    
+  </div>
+</div>   
+    
+
+
+
+    
+    
+    <div class="mdui-card-menu">
+    
+      <button class="mdui-btn mdui-btn-icon mdui-text-color-teal" mdui-menu="{target: '#share_menu', align: 'right'}"><i class="iconfont icon-share"></i></button>
+      <ul class="mdui-menu" id="share_menu">
+        <li class="mdui-menu-item">
+          <a href="http://service.weibo.com/share/share.php?appkey=&title=【Leetcode】第213场周赛&url=http://yoursite.com/2020/11/01/weekcontest-213/&pic=http://yoursite.com/images/fav.webp&searchPic=false&style=simple" target="_blank" class="mdui-ripple">分享到 Weibo</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://twitter.com/intent/tweet?text=【Leetcode】第213场周赛&url=http://yoursite.com/2020/11/01/weekcontest-213/&via=Halobin" target="_blank" class="mdui-ripple">分享到 Twitter</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2020/11/01/weekcontest-213/" target="_blank" class="mdui-ripple">分享到 Facebook</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://plus.google.com/share?url=http://yoursite.com/2020/11/01/weekcontest-213/" target="_blank" class="mdui-ripple">分享到 Google+</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://yoursite.com/2020/11/01/weekcontest-213/&title=【Leetcode】第213场周赛" target="_blank" class="mdui-ripple">分享到 LinkedIn</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="http://connect.qq.com/widget/shareqq/index.html?site=Halobin&#39;s Blog&title=【Leetcode】第213场周赛&summary=越努力，越幸运&pics=http://yoursite.com/images/fav.webp&url=http://yoursite.com/2020/11/01/weekcontest-213/" target="_blank" class="mdui-ripple">分享到 QQ</a>
+        </li>
+        <li class="mdui-menu-item">
+          <a href="https://telegram.me/share/url?url=http://yoursite.com/2020/11/01/weekcontest-213/&text=【Leetcode】第213场周赛" target="_blank" class="mdui-ripple">分享到 Telegram</a>
+        </li>
+      </ul>
+    
+  </div>
+  </header>
+  
+  
+  
+  
+  <div class="post-tags">
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/ >动态规划</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/%E8%B4%AA%E5%BF%83/ >贪心</a>
+      </i>
+    
+      <i class="iconfont icon-tag">
+        <a rel="tag" href = /tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/ >组合数学</a>
+      </i>
+    
+  </div>
+
+  
+  <div class="mdui-card-content mdui-typo mdui-p-x-4">
+    <h2 id="A-能否连接形成数组"><a href="#A-能否连接形成数组" class="headerlink" title="A.能否连接形成数组"></a>A.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/check-array-formation-through-concatenation/">能否连接形成数组</a></h2><p><font size=4><strong>解题思路：</strong></font><br>暴力。从第一位开始枚举，如果piece[i] 可以满足，则加上piece[i] 的长度继续枚举。<br><font size=4><strong>代码展示：</strong></font></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; arr,vis;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; pieces;</span><br><span class="line">    <span class="keyword">int</span> n,m;</span><br><span class="line">    <span class="keyword">bool</span> tmp;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canFormArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; pieces)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;arr = arr;</span><br><span class="line">        <span class="keyword">this</span>-&gt;pieces = pieces;</span><br><span class="line">        n = arr.size();</span><br><span class="line">        tmp = <span class="literal">false</span>;</span><br><span class="line">        m = pieces.size();</span><br><span class="line">        vis.resize(m,<span class="literal">false</span>);</span><br><span class="line">        dfs(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isok</span><span class="params">(<span class="keyword">int</span> k,<span class="keyword">int</span> t)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; pieces[t].size();i++)</span><br><span class="line">            <span class="keyword">if</span>(pieces[t][i] != arr[k + i])  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(k &gt;= n)&#123;</span><br><span class="line">            tmp = <span class="literal">true</span>; <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; m;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!vis[i] &amp;&amp; isok(k,i))&#123;</span><br><span class="line">                vis[i] = <span class="literal">true</span>;</span><br><span class="line">                dfs(k + pieces[i].size());</span><br><span class="line">                vis[i] = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h2 id="B-统计字典序元音字符串的数目"><a href="#B-统计字典序元音字符串的数目" class="headerlink" title="B.统计字典序元音字符串的数目"></a>B.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/count-sorted-vowel-strings/">统计字典序元音字符串的数目</a></h2><p><font size=4><strong>解题思路：</strong></font><br>动态规划。dp[i] [0], dp[i] [1] ……dp[i] [4]，记为长度为 i 的字符串为a,e,i,o,u开头的合法字符串个数。所以递推公式为：<br>$$<br>dp[i][j] = \sum\limits_{k=j}^4dp[i-1][k]<br>$$<br><font size=4><strong>代码展示：</strong></font></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countVowelStrings</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> dp[<span class="number">55</span>][<span class="number">5</span>];</span><br><span class="line">        <span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">5</span>;i++)    dp[<span class="number">1</span>][i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>;i &lt;= n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; <span class="number">5</span>;j++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = j;k &lt; <span class="number">5</span>;k++)</span><br><span class="line">                    dp[i][j] += dp[i<span class="number">-1</span>][k];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">5</span>;i++)    ans += dp[n][i];</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="C-可以到达的最远建筑"><a href="#C-可以到达的最远建筑" class="headerlink" title="C.可以到达的最远建筑"></a>C.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/furthest-building-you-can-reach/">可以到达的最远建筑</a></h2><p><font size=4><strong>解题思路：</strong></font><br>贪心，优先队列。从左往右的移动，优先使用砖头，当砖头不够用时，如果无梯子，则当前位置即为能到达最远位置，如果有梯子，将到下一个位置所需要的砖头数与之前每一次使用的砖头数的大值替换成梯子，用优先队列存放每次使用的砖头数。<br><font size=4><strong>代码展示：</strong></font></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">furthestBuilding</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; heights, <span class="keyword">int</span> bricks, <span class="keyword">int</span> ladders)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">priority_queue</span> &lt;<span class="keyword">int</span>,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;,less&lt;<span class="keyword">int</span>&gt; &gt; q;</span><br><span class="line">        <span class="keyword">int</span> n = heights.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n - <span class="number">1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(heights[i] &gt;= heights[i + <span class="number">1</span>])    <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">int</span> x = heights[i + <span class="number">1</span>] - heights[i];</span><br><span class="line">            <span class="keyword">if</span>(x &lt;= bricks)&#123;</span><br><span class="line">                q.push(x);</span><br><span class="line">                bricks -= x;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                bricks -= x;</span><br><span class="line">                <span class="keyword">if</span>(ladders--)&#123;</span><br><span class="line">                    q.push(x);</span><br><span class="line">                    bricks += q.top();</span><br><span class="line">                    q.pop();</span><br><span class="line">                &#125;<span class="keyword">else</span></span><br><span class="line">                    <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="D-第-K-条最小指令"><a href="#D-第-K-条最小指令" class="headerlink" title="D.第 K 条最小指令"></a>D.<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/kth-smallest-instructions/">第 K 条最小指令</a></h2><p><font size=4><strong>解题思路：</strong></font><br>组合数学。优先确定高位，用组合数算出以H为高位接下来有t种方案，如果t&gt;=k，则确定高位为H，否则为V，如果为V则减去以H为高位的所有方案。</p>
+<p><font size=4><strong>代码展示：</strong></font></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> k,cnt;</span><br><span class="line">    <span class="built_in">string</span> res;</span><br><span class="line">    ll dp[<span class="number">50</span>][<span class="number">50</span>];</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">kthSmallestPath</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; destination, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        dp[<span class="number">1</span>][<span class="number">0</span>]=dp[<span class="number">1</span>][<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=<span class="number">30</span>;++i)&#123;</span><br><span class="line">            dp[i][<span class="number">0</span>]=dp[i][i]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;i;++j)&#123;</span><br><span class="line">                dp[i][j]=dp[i<span class="number">-1</span>][j]+dp[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> r = destination[<span class="number">0</span>], c = destination[<span class="number">1</span>]; <span class="comment">//r个V c个H</span></span><br><span class="line">        <span class="keyword">int</span> n = r + c; </span><br><span class="line">        res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!c)  &#123;</span><br><span class="line">                res += <span class="string">&#x27;V&#x27;</span>;<span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!r)  &#123;</span><br><span class="line">                res += <span class="string">&#x27;H&#x27;</span>;<span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ll t = dp[r+c<span class="number">-1</span>][c<span class="number">-1</span>];</span><br><span class="line">            <span class="keyword">if</span>(t &gt;= k)&#123;</span><br><span class="line">                res += <span class="string">&#x27;H&#x27;</span>;</span><br><span class="line">                c--;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                k -= t;</span><br><span class="line">                res += <span class="string">&#x27;V&#x27;</span>;</span><br><span class="line">                r--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><font size=5><strong>做题情况：</strong></font><br>AC 三题<br>排名：415 / 3826<br><font size=5><strong>总结反思：</strong></font><br>第三题忘记把当前的使用砖头数减去，导致wa了一发。第四题一开始想到的是递归回溯的方法，写了半天T了。</p>
+
+  </div>
+  <!--文末结束语-->
+  
+    <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 --- </div>
+  
+  <!--页脚广告-->
+  
+  <div class="mdui-divider"></div>
+  
+  <nav>
+    
+    
+      <a rel="next" class="post-nav-item mdui-float-right" href="/2020/10/29/mono_stack/">
+        <span>浅谈单调栈</span>
+        <i class="iconfont icon-angle-right"></i>
+      </a>
+    
+  </nav>
+</article>
+
+
+
+
+  <div class="toc-button"  style="z-index: 100;">
+    <button class="mdui-fab mdui-ripple mdui-color-teal" mdui-menu="{target: '#toc'}"><i class="iconfont icon-list"></i></button>
+    <ul class="mdui-menu" id="toc">
+      <li class="mdui-menu-item">
+        <a href="/2020/11/01/weekcontest-213/" id="toc-header" class="mdui-ripple">文章目录</a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-%E8%83%BD%E5%90%A6%E8%BF%9E%E6%8E%A5%E5%BD%A2%E6%88%90%E6%95%B0%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">A.能否连接形成数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-%E7%BB%9F%E8%AE%A1%E5%AD%97%E5%85%B8%E5%BA%8F%E5%85%83%E9%9F%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%95%B0%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">B.统计字典序元音字符串的数目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E5%8F%AF%E4%BB%A5%E5%88%B0%E8%BE%BE%E7%9A%84%E6%9C%80%E8%BF%9C%E5%BB%BA%E7%AD%91"><span class="toc-number">3.</span> <span class="toc-text">C.可以到达的最远建筑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#D-%E7%AC%AC-K-%E6%9D%A1%E6%9C%80%E5%B0%8F%E6%8C%87%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">D.第 K 条最小指令</span></a></li></ol>
+      </li>
+    </ul>
+  </div>
+
+
+
+  </main>
+  <footer id="footer" class="mdui-text-center mdui-m-t-5 mdui-p-b-2 mdui-p-t-4 mdui-color-theme">
+  <div class="mdui-container">
+    <div class="mdui-row">
+      
+        <a href="https://beian.miit.gov.cn" rel="noopener" target="_blank"></a>
+      
+      <span>
+        &copy; 2020 
+        
+          <span style="color:#d9333f" class="iconfont icon-heart"></span>
+        
+        Halobin
+      </span>
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span>Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span>Theme: <a href="https://github.com/kb1000fx/Meadow" rel="noopener" target="_blank">Meadow</a></span>
+        </div>
+      
+    </div>
+    <div class="mdui-row">
+      
+        <div class="mdui-col-xs-6 mdui-text-right">
+          <span id="busuanzi_container_site_uv" style="display: none;"> <span class="iconfont icon-user"></span>总访客量 <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="mdui-col-xs-6 mdui-text-left">
+          <span id="busuanzi_container_site_pv" style="display: none;"> <span class="iconfont icon-eye"></span>总访问量 <span id="busuanzi_value_site_pv"></span></span>
+        </div>
+      
+    </div>
+ </div>
+</footer>
+  
+  <button id="gotop" class="mdui-fab mdui-fab-fixed mdui-fab-hide mdui-ripple mdui-color-teal" style="z-index:100;"><i class="iconfont icon-arrowup"></i></button>
+  
+  
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+    
+<script src="/js/mdui.min.v1.0.0.js"></script>
+
+
+
+
+<script src="/js/meadow.js"></script>
+
+</body>
+</html >
