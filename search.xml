@@ -59,11 +59,11 @@
 <ol>
 <li>枚举第一个元素7。此时栈空，入栈。栈内元素：7。</li>
 <li>枚举第二个元素3。此时栈顶元素7 &gt; 3，则入栈。栈内元素：7，3。</li>
-<li>枚举第三个元素4。此时栈顶元素3 &lt; 4, 则栈顶元素出栈。此时栈顶元素7 &gt; 4，则入栈。栈内元素：7，4。</li>
-<li>枚举第四个元素9。此时栈顶元素4 &lt; 9, 则栈顶元素出栈。此时栈顶元素7 &lt; 9, 则栈顶元素出栈。此时栈空，入栈。栈内元素：9。</li>
+<li>枚举第三个元素4。此时栈顶元素3 &lt; 4，则栈顶元素出栈。此时栈顶元素7 &gt; 4，则入栈。栈内元素：7，4。</li>
+<li>枚举第四个元素9。此时栈顶元素4 &lt; 9，则栈顶元素出栈。此时栈顶元素7 &lt; 9，则栈顶元素出栈。此时栈空，入栈。栈内元素：9。</li>
 <li>枚举第五个元素1。此时栈顶元素9 &gt; 1，则入栈。栈内元素：9，1。</li>
 <li>枚举第六个元素0。此时栈顶元素1 &gt; 0，则入栈。栈内元素：9，1，0。</li>
-<li>枚举第七个元素8。此时栈顶元素0 &lt; 8，则栈顶元素出栈。此时栈顶元素1 &lt; 8, 则栈顶元素出栈。此时栈顶元素9 &gt; 8，则入栈。栈内元素：9，8。</li>
+<li>枚举第七个元素8。此时栈顶元素0 &lt; 8，则栈顶元素出栈。此时栈顶元素1 &lt; 8，则栈顶元素出栈。此时栈顶元素9 &gt; 8，则入栈。栈内元素：9，8。</li>
 <li>枚举第八个元素6。此时栈顶元素8 &gt; 6，则入栈。栈内元素：9，8，6。</li>
 <li>枚举第九个元素2。此时栈顶元素6 &gt; 2，则入栈。栈内元素：9，8，6，2。</li>
 </ol>
@@ -321,6 +321,46 @@
         <tag>动态规划</tag>
         <tag>贪心</tag>
         <tag>组合数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C#部分用法整理</title>
+    <url>/2020/12/04/summary-of-CSHARP/</url>
+    <content><![CDATA[<h2 id="1、输出"><a href="#1、输出" class="headerlink" title="1、输出"></a>1、输出</h2><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">Console.WriteLine(<span class="string">&quot;输出&quot;</span>); <span class="comment">//控制台输出</span></span><br><span class="line"></span><br><span class="line">Console.WriteLine(格式字符串(含替代标记),替换值<span class="number">0</span>,替换值<span class="number">1</span>,替换值<span class="number">2</span>,...);</span><br><span class="line">Console.WriteLine(<span class="string">&quot;两个整数示例是 &#123;0&#125; 和 &#123;1&#125;&quot;</span>,<span class="number">3</span>,<span class="number">6</span>);</span><br><span class="line"><span class="comment">//输出结果为：两个整数示例是 3 和 6</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2、计时"><a href="#2、计时" class="headerlink" title="2、计时"></a>2、计时</h2><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">DateTime beforeDT = System.DateTime.Now; <span class="comment">//获取开始时间</span></span><br><span class="line">程序段</span><br><span class="line">DateTime afterDT = System.DateTime.Now; <span class="comment">//获取结束时间</span></span><br><span class="line">TimeSpan ts = afterDT.Subtract(beforeDT); <span class="comment">//结束时间减去开始时间</span></span><br><span class="line">Console.WriteLine(<span class="string">&quot;DateTime costed for Shuffle function is: &#123;0&#125;ms&quot;</span>, ts.TotalMilliseconds); <span class="comment">//控制台输出时间</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3、多线程"><a href="#3、多线程" class="headerlink" title="3、多线程"></a>3、多线程</h2><h4 id="3-1-创建并启动线程"><a href="#3-1-创建并启动线程" class="headerlink" title="3.1 创建并启动线程"></a>3.1 创建并启动线程</h4><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line">Thread socketLine = <span class="keyword">new</span> Thread(Recieve_Message); <span class="comment">//创建线程 线程执行Recieve_Message这个函数</span></span><br><span class="line">socketLine.Start();<span class="comment">//启动线程</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-线程信号量"><a href="#3-2-线程信号量" class="headerlink" title="3.2 线程信号量"></a>3.2 线程信号量</h4><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">readonly</span> ManualResetEvent mresend = <span class="keyword">new</span> ManualResetEvent(<span class="literal">false</span>); <span class="comment">//创建一个信号量，初始状态为False</span></span><br><span class="line"></span><br><span class="line">mresend.WaitOne(); <span class="comment">//等待信号，如果信号是False则阻塞</span></span><br><span class="line">mresend.Set(); <span class="comment">//将信号设为True，允许阻塞的经常恢复</span></span><br><span class="line">mresend.Reset(); <span class="comment">//将信号设为Fasle</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4、定时"><a href="#4、定时" class="headerlink" title="4、定时"></a>4、定时</h2><h4 id="4-1-定时器控件"><a href="#4-1-定时器控件" class="headerlink" title="4.1 定时器控件"></a>4.1 定时器控件</h4><p>定义在System.Windows.Forms里,占用主线程执行定时器功能</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">//在From中添加控件，然后在timer_Tick方法中，实现定时器的功能</span></span><br><span class="line">timer.Interval = <span class="number">1500</span>; <span class="comment">//定时器时间,单位为ms</span></span><br><span class="line">timer.Enabled = <span class="literal">true</span>; <span class="comment">//是否执行timer_Tick方法</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-定时器类"><a href="#4-2-定时器类" class="headerlink" title="4.2 定时器类"></a>4.2 定时器类</h4><p>定义在System.Timers.Timer类里,不占用主线程。</p>
+<figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="comment">//实例化Timer类，设置间隔时间为1000毫秒； </span></span><br><span class="line">System.Timers.Timer t = <span class="keyword">new</span> System.Timers.Timer(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//到达时间的时候执行事件；</span></span><br><span class="line">t.Elapsed += <span class="keyword">new</span> System.Timers.ElapsedEventHandler(theout); </span><br><span class="line">t.AutoReset = <span class="literal">true</span>;<span class="comment">//设置是执行一次（false）还是一直执行(true)； </span></span><br><span class="line">t.Enabled = <span class="literal">true</span>;<span class="comment">//是否执行System.Timers.Timer.Elapsed事件；</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5、文件"><a href="#5、文件" class="headerlink" title="5、文件"></a>5、文件</h2><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">string</span> path = System.AppDomain.CurrentDomain.BaseDirectory + <span class="string">&quot;parameter.txt&quot;</span>; <span class="comment">//文件路径</span></span><br><span class="line">File.Exists(@path) <span class="comment">//文件是否存在</span></span><br><span class="line">File.Create(@path) <span class="comment">//创建文件</span></span><br><span class="line">FileStream fs = <span class="keyword">new</span> FileStream(path, FileMode.Open); <span class="comment">//创建文件流</span></span><br><span class="line">fs.Seek(x, SeekOrigin.Begin); <span class="comment">//设置文件流的起始位置为x</span></span><br><span class="line">fs.Write(data, <span class="number">0</span>, data.Length); <span class="comment">//文件写入</span></span><br><span class="line">fs.Close(); <span class="comment">//文件流关闭</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="6、绘图"><a href="#6、绘图" class="headerlink" title="6、绘图"></a>6、绘图</h2><figure class="highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> Graphics g = <span class="keyword">this</span>.panel1.CreateGraphics(); <span class="comment">//创建绘画类</span></span><br><span class="line">Pen p1 = <span class="keyword">new</span> Pen(Color.Yellow, <span class="number">0.2f</span>); <span class="comment">//创建画笔，设置颜色大小</span></span><br><span class="line">g.Clear(Color.White); <span class="comment">//清空成白色</span></span><br><span class="line">g.DrawLine(p1, <span class="keyword">new</span> PointF(x1, y2), <span class="keyword">new</span> PointF(x2, y2)); <span class="comment">//用p1画笔画一条线段从(x1,y1)到(x2,y2)</span></span><br><span class="line">g.DrawEllipse(p1, x, y, w, h); <span class="comment">//用p1画笔画一个椭圆，椭圆边框左上角坐标为(x,y),椭圆宽度为w，高度为h</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>C#</category>
+      </categories>
+      <tags>
+        <tag>C#</tag>
       </tags>
   </entry>
 </search>
