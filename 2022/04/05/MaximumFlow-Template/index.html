@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>最大流模板 | Halobin's Blog</title><meta name="keywords" content="网络流,最大流"><meta name="author" content="Halobin"><meta name="copyright" content="Halobin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1、定义 可行流设f(u,v)表示边(u,v)的当前容量上限 设c(u,v)表示边(u,v)的最大容量上限 如果网络流图中的流量满足  源点S：流出量&#x3D;流量总量 汇点T：流入量&#x3D;流量总量 任意边(u,v)：0&lt;&#x3D;f(u,v)&lt;&#x3D;c(u,v)  则称该流为一个可行流 增广增加一条路径的流量，即减少这条路径的当前流量上限，即f(u,v)的值 增广是我们求解最大流的基础 最大流在所有可行流中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最大流模板">
+<meta property="og:url" content="https://halobin.github.io/2022/04/05/MaximumFlow-Template/index.html">
+<meta property="og:site_name" content="Halobin&#39;s Blog">
+<meta property="og:description" content="1、定义 可行流设f(u,v)表示边(u,v)的当前容量上限 设c(u,v)表示边(u,v)的最大容量上限 如果网络流图中的流量满足  源点S：流出量&#x3D;流量总量 汇点T：流入量&#x3D;流量总量 任意边(u,v)：0&lt;&#x3D;f(u,v)&lt;&#x3D;c(u,v)  则称该流为一个可行流 增广增加一条路径的流量，即减少这条路径的当前流量上限，即f(u,v)的值 增广是我们求解最大流的基础 最大流在所有可行流中">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2022-04-05T05:26:19.000Z">
+<meta property="article:modified_time" content="2022-04-05T06:36:03.240Z">
+<meta property="article:author" content="Halobin">
+<meta property="article:tag" content="网络流">
+<meta property="article:tag" content="最大流">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://halobin.github.io/2022/04/05/MaximumFlow-Template/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Halobin","link":"链接: ","source":"来源: Halobin's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '最大流模板',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-05 14:36:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/font_2598432_qi8r9d6x0ea.css"><meta name="generator" content="Hexo 5.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/images/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Halobin's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">最大流模板</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-05T05:26:19.000Z" title="发表于 2022-04-05 13:26:19">2022-04-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-05T06:36:03.240Z" title="更新于 2022-04-05 14:36:03">2022-04-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="最大流模板"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><p><font size=5><strong>1、定义</strong></font></p>
+<h5 id="可行流"><a href="#可行流" class="headerlink" title="可行流"></a>可行流</h5><p>设f(u,v)表示边(u,v)的<strong>当前</strong>容量上限</p>
+<p>设c(u,v)表示边(u,v)的<strong>最大</strong>容量上限</p>
+<p>如果网络流图中的流量满足</p>
+<ul>
+<li>源点S：流出量=流量总量</li>
+<li>汇点T：流入量=流量总量</li>
+<li>任意边(u,v)：0&lt;=f(u,v)&lt;=c(u,v)</li>
+</ul>
+<p>则称该流为一个<strong>可行流</strong></p>
+<h5 id="增广"><a href="#增广" class="headerlink" title="增广"></a>增广</h5><p>增加一条路径的流量，即减少这条路径的当前流量上限，即f(u,v)的值</p>
+<p>增广是我们求解最大流的基础</p>
+<h5 id="最大流"><a href="#最大流" class="headerlink" title="最大流"></a>最大流</h5><p>在所有可行流中流量最大的流</p>
+<a id="more"></a>
+
+<p><font size=5><strong>2、模板</strong></font></p>
+<h4 id="EK算法"><a href="#EK算法" class="headerlink" title="EK算法"></a>EK算法</h4><p>maxFlowEK返回值即为网络中最大值，cap数组中原边的逆边即为每个边的流量。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> cap[maxMN][maxMN];</span><br><span class="line"><span class="keyword">int</span> pre[maxMN], flow[maxMN];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">maxFlowInit</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(cap,<span class="number">0</span>,<span class="keyword">sizeof</span>(cap));</span><br><span class="line">    <span class="built_in">memset</span>(flow,<span class="number">0</span>,<span class="keyword">sizeof</span>(flow));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxFlowEKBFS</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to)</span></span>&#123;</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="built_in">memset</span>(pre,<span class="number">-1</span>,<span class="keyword">sizeof</span>(pre));</span><br><span class="line">    pre[from] = <span class="number">0</span>;</span><br><span class="line">    flow[from] = maxCap;</span><br><span class="line">    q.push(from);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> id = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">if</span>(id == to)    <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span> ; i &lt;= superTo; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i != from &amp;&amp; cap[id][i]&gt;<span class="number">0</span> &amp;&amp; pre[i] == <span class="number">-1</span>)&#123;</span><br><span class="line">                pre[i] = id;</span><br><span class="line">                flow[i] = min(cap[id][i], flow[id]);</span><br><span class="line">                q.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(pre[to] == <span class="number">-1</span>)   <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span>    <span class="keyword">return</span> flow[to];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxFlowEK</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ins = <span class="number">0</span>, resMaxFlow = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>((ins = maxFlowEKBFS(from, to)) != <span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = to;</span><br><span class="line">        <span class="keyword">while</span>(tmp != from)&#123;</span><br><span class="line">            <span class="keyword">int</span> last = pre[tmp];</span><br><span class="line">            cap[last][tmp] -= ins;</span><br><span class="line">            cap[tmp][last] += ins;</span><br><span class="line">            tmp = last;</span><br><span class="line">        &#125;</span><br><span class="line">        resMaxFlow += ins;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> resMaxFlow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Dinic算法"><a href="#Dinic算法" class="headerlink" title="Dinic算法"></a>Dinic算法</h5><p>当前弧优化版本。</p>
+<p>maxFlowDinic返回值即为网络中最大值，edge数组中原边的逆边即为每个边的流量，每个边的下一个边即为逆边。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> from, to, cap;</span><br><span class="line">&#125;edge[maxMN * maxMN &lt;&lt; <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> cur[maxMN * maxMN &lt;&lt; <span class="number">1</span>], dep[maxMN * maxMN &lt;&lt; <span class="number">1</span>], que[maxMN * maxMN &lt;&lt; <span class="number">1</span>], cnt = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">maxFlowDinicInit</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(pre, <span class="number">-1</span>, <span class="keyword">sizeof</span>(pre));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEdge</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to, <span class="keyword">int</span> cap)</span></span>&#123;</span><br><span class="line">    edge[cnt].from = to;</span><br><span class="line">    edge[cnt].to = pre[from];</span><br><span class="line">    edge[cnt].cap = cap;</span><br><span class="line">    pre[from] = cnt++;</span><br><span class="line">    edge[cnt].from = from;</span><br><span class="line">    edge[cnt].to = pre[to];</span><br><span class="line">    edge[cnt].cap = <span class="number">0</span>;</span><br><span class="line">    pre[to] = cnt++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">maxFlowDinicBFS</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(dep, <span class="number">0</span>, <span class="keyword">sizeof</span>(dep));</span><br><span class="line">    dep[superFrom] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> le = <span class="number">0</span>, ri = <span class="number">1</span>;</span><br><span class="line">    que[++le] = superFrom;</span><br><span class="line">    <span class="keyword">while</span>(le &lt;= ri)&#123;</span><br><span class="line">        <span class="keyword">int</span> now = que[le++];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> iq = pre[now]; iq != <span class="number">-1</span>; iq = edge[iq].to)</span><br><span class="line">            <span class="keyword">if</span>(!dep[edge[iq].from] &amp;&amp; edge[iq].cap)&#123;</span><br><span class="line">                dep[edge[iq].from] = dep[now] + <span class="number">1</span>;</span><br><span class="line">                que[++ri] = edge[iq].from;</span><br><span class="line">                <span class="keyword">if</span>(edge[iq].from == superTo)    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dep[superTo];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxFlowDinicDFS</span><span class="params">(<span class="keyword">int</span> now, <span class="keyword">int</span> flow)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(now == superTo)  <span class="keyword">return</span> flow;</span><br><span class="line">    <span class="keyword">int</span> sumFlow = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> iq = pre[now]; iq != <span class="number">-1</span>; iq = edge[iq].to)&#123;</span><br><span class="line">        <span class="keyword">if</span>(dep[edge[iq].from] == dep[now] + <span class="number">1</span> &amp;&amp; edge[iq].cap)&#123;</span><br><span class="line">            <span class="keyword">int</span> ins = maxFlowDinicDFS(edge[iq].from, min(flow, edge[iq].cap));</span><br><span class="line">            edge[iq].cap -= ins;</span><br><span class="line">            edge[iq ^ <span class="number">1</span>].cap += ins;</span><br><span class="line">            sumFlow += ins;</span><br><span class="line">            flow -= ins;</span><br><span class="line">            <span class="keyword">if</span>(flow &lt;= <span class="number">0</span>)    <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sumFlow;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxFlowDinic</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxFlow = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(maxFlowDinicBFS())&#123;</span><br><span class="line">        <span class="built_in">memcpy</span>(cur, pre, <span class="keyword">sizeof</span>(pre));</span><br><span class="line">        maxFlow += maxFlowDinicDFS(superFrom, <span class="number">2</span> * maxCap);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxFlow;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><font size=5><strong>3、总结</strong></font></p>
+<p>可以解决很多网络上流量分配，聚类等问题。问题的关键在于如何建图，对于多源点多汇点的图可以添加超源和超汇进行解决。EK算法时间复杂度$O(nm^2)$，Dinic算法的时间复杂度$O(mn^2)$，可以根据图的稀疏程度选取对应算法。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Halobin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://halobin.github.io/2022/04/05/MaximumFlow-Template/">https://halobin.github.io/2022/04/05/MaximumFlow-Template/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://halobin.github.io" target="_blank">Halobin's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/">网络流</a><a class="post-meta__tags" href="/tags/%E6%9C%80%E5%A4%A7%E6%B5%81/">最大流</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/images/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/images/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/images/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/images/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/01/24/MySQL/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MySQL 用法记录</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/images/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Halobin</div><div class="author-info__description">越努力，越幸运</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Halobin" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://leetcode-cn.com/u/halobin" target="_blank" title="Leetcode"><i class="iconfont icon-leetcode"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%AF%E8%A1%8C%E6%B5%81"><span class="toc-text">可行流</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A2%9E%E5%B9%BF"><span class="toc-text">增广</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%80%E5%A4%A7%E6%B5%81"><span class="toc-text">最大流</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EK%E7%AE%97%E6%B3%95"><span class="toc-text">EK算法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Dinic%E7%AE%97%E6%B3%95"><span class="toc-text">Dinic算法</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/05/MaximumFlow-Template/" title="最大流模板">最大流模板</a><time datetime="2022-04-05T05:26:19.000Z" title="发表于 2022-04-05 13:26:19">2022-04-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/01/24/MySQL/" title="MySQL 用法记录">MySQL 用法记录</a><time datetime="2022-01-24T05:47:19.000Z" title="发表于 2022-01-24 13:47:19">2022-01-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/12/04/summary-of-CSHARP/" title="C#部分用法整理">C#部分用法整理</a><time datetime="2020-12-04T03:05:50.000Z" title="发表于 2020-12-04 11:05:50">2020-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/01/weekcontest-213/" title="【Leetcode】第213场周赛">【Leetcode】第213场周赛</a><time datetime="2020-11-01T10:53:03.000Z" title="发表于 2020-11-01 18:53:03">2020-11-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/10/29/mono_stack/" title="浅谈单调栈">浅谈单调栈</a><time datetime="2020-10-29T11:14:19.000Z" title="发表于 2020-10-29 19:14:19">2020-10-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Halobin</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">来路不由己，未来尚可期！</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
